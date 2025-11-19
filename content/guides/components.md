@@ -95,7 +95,9 @@ This is a success callout. Use it to confirm successful operations or best pract
 
 ## Images
 
-![Example Image](https://via.placeholder.com/800x400?text=Documentation+Example)
+Images are automatically optimized and responsive:
+
+![Documentation Example](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop&q=80)
 
 ## Horizontal Rules
 
