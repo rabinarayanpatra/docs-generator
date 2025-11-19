@@ -20,14 +20,14 @@ export function Image({
   className,
   ...props
 }: ImageProps) {
-  // For markdown images (without explicit width/height), use unoptimized mode
-  // to avoid layout shift and allow responsive sizing
+  // For markdown images (without explicit width/height), use simpler wrapper
+  // to avoid HTML nesting issues with <p> tags
   const isMarkdownImage = !width && !height
 
   if (isMarkdownImage) {
     return (
-      <figure className="my-8">
-        <div className="relative overflow-hidden rounded-lg border border-border">
+      <span className="my-8 block">
+        <span className="block overflow-hidden rounded-lg border border-border">
           <NextImage
             src={src}
             alt={alt || ''}
@@ -37,13 +37,13 @@ export function Image({
             unoptimized
             {...props}
           />
-        </div>
+        </span>
         {caption && (
-          <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+          <span className="mt-2 block text-center text-sm text-muted-foreground">
             {caption}
-          </figcaption>
+          </span>
         )}
-      </figure>
+      </span>
     )
   }
 
