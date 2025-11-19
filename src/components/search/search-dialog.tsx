@@ -129,13 +129,13 @@ export function SearchDialog() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-md"
         onClick={() => setIsOpen(false)}
       />
 
       {/* Dialog */}
-      <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
-        <div className="relative w-full max-w-2xl rounded-lg border border-border bg-background shadow-2xl">
+      <div className="pointer-events-none fixed inset-0 z-[110] flex items-start justify-center pt-[20vh]">
+        <div className="pointer-events-auto relative w-full max-w-2xl rounded-lg border border-border bg-background shadow-2xl">
           {/* Search Input */}
           <div className="flex items-center gap-3 border-b border-border px-4 py-3">
             <Search className="h-5 w-5 text-muted-foreground" />
