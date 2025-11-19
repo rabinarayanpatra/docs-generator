@@ -204,6 +204,133 @@ Use tabs to organize related content like code examples for different package ma
   </TabPanel>
 </Tabs>
 
+## Math Equations
+
+Our documentation supports mathematical equations using KaTeX syntax.
+
+### Inline Math
+
+Use single dollar signs for inline equations: $E = mc^2$ and $a^2 + b^2 = c^2$.
+
+### Block Math
+
+Use double dollar signs for display equations:
+
+$$
+\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+### Complex Equations
+
+$$
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &= \frac{4\pi}{c}\vec{\mathbf{j}} \\
+\nabla \cdot \vec{\mathbf{E}} &= 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &= \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} &= 0
+\end{aligned}
+$$
+
+## Diagrams with Mermaid
+
+Create beautiful diagrams using Mermaid syntax.
+
+### Flow Chart
+
+<Mermaid chart={`graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B
+    C --> E[End]`} />
+
+### Sequence Diagram
+
+<Mermaid chart={`
+sequenceDiagram
+participant User
+participant Browser
+participant Server
+participant Database
+
+    User->>Browser: Enter URL
+    Browser->>Server: HTTP Request
+    Server->>Database: Query Data
+    Database-->>Server: Return Data
+    Server-->>Browser: HTTP Response
+    Browser-->>User: Display Page
+
+`} />
+
+### Class Diagram
+
+<Mermaid chart={`classDiagram
+    class Animal {
+        +String name
+        +int age
+        +makeSound()
+    }
+    class Dog {
+        +String breed
+        +bark()
+    }
+    class Cat {
+        +String color
+        +meow()
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat`} />
+
+## Cards
+
+Highlight features, links, or important information using cards.
+
+### Basic Cards
+
+<CardGrid cols={2}>
+  <Card title="Getting Started">
+    Learn the basics of setting up and using this documentation system.
+  </Card>
+  <Card title="Advanced Features">
+    Explore advanced features like custom components and theming.
+  </Card>
+</CardGrid>
+
+### Cards with Links
+
+<CardGrid cols={3}>
+  <Card title="Installation" href="/guides/getting-started">
+    Quick setup guide to get you started in minutes.
+  </Card>
+  <Card title="Configuration" href="/guides/configuration">
+    Customize your documentation to match your needs.
+  </Card>
+  <Card title="Deployment" href="/guides/deployment">
+    Deploy your documentation to production.
+  </Card>
+</CardGrid>
+
+### Feature Cards
+
+<CardGrid cols={2}>
+  <Card title="Fast Performance">
+    Built with Next.js for optimal performance and SEO.
+  </Card>
+  <Card title="Full-text Search">
+    Powerful search with FlexSearch for instant results.
+  </Card>
+  <Card title="Dark Mode">
+    Beautiful light and dark themes with automatic switching.
+  </Card>
+  <Card title="MDX Support">
+    Write content in Markdown with React components.
+  </Card>
+</CardGrid>
+
 ## Tips for Using Components
 
 <Callout type="info" title="Best Practices">
@@ -212,4 +339,7 @@ Use tabs to organize related content like code examples for different package ma
 - Keep code examples concise and focused
 - Add descriptive titles to callouts when possible
 - Use tabs for alternative options (package managers, languages, etc.)
+- Use inline math for simple equations and block math for complex ones
+- Use Mermaid diagrams to visualize flows, architectures, and relationships
+- Use cards to highlight features or create visual navigation
 </Callout>

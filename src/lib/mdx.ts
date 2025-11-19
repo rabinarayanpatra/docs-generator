@@ -2,7 +2,9 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import { visit } from 'unist-util-visit'
 import type { Root, Link } from 'mdast'
 import mdxComponents from '@/components/mdx/mdx-components'
@@ -35,7 +37,7 @@ export async function compileMDXContent(source: string) {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkRelativeLinks],
+        remarkPlugins: [remarkGfm, remarkMath, remarkRelativeLinks],
         rehypePlugins: [
           rehypeSlug,
           [
@@ -57,6 +59,7 @@ export async function compileMDXContent(source: string) {
               keepBackground: false,
             },
           ],
+          rehypeKatex,
         ],
       },
     },

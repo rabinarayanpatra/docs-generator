@@ -4,6 +4,9 @@ import { Callout } from './callout'
 import { TabsComponent, TabList, Tab, TabPanel } from './tabs'
 import { Steps, Step } from './steps'
 import { FileTree, FileTreeItem } from './file-tree'
+import { Image } from './image'
+import { Mermaid } from './mermaid'
+import { Card, CardGrid } from './card'
 import { cn } from '@/lib/utils'
 
 const components = {
@@ -166,17 +169,11 @@ const components = {
     <hr className="my-4 border-border md:my-8" {...props} />
   ),
 
-  // Image
-  img: ({
-    className,
-    alt,
-    ...props
-  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn('rounded-md border', className)} alt={alt} {...props} />
-  ),
+  // Image - Override with Next.js Image for optimization
+  img: Image,
 
   // Custom components
+  Image, // Also available as <Image> component
   Callout,
   Tabs: TabsComponent,
   TabList,
@@ -186,6 +183,9 @@ const components = {
   Step,
   FileTree,
   FileTreeItem,
+  Mermaid,
+  Card,
+  CardGrid,
 }
 
 export default components
