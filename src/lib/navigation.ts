@@ -83,7 +83,38 @@ export async function buildNavigationTree(): Promise<NavigationNode[]> {
       }))
   }
 
-  return sortNodes(rootItems)
+  // Fix hrefs for nodes with children but no index.md
+  // Point them to the first child's href
+  function fixMissingIndexHrefs(nodes: NavigationNode[]): NavigationNode[] {
+    return nodes.map((node) => {
+      const fixedChildren = fixMissingIndexHrefs(node.children)
+
+      // If node has children but href points to a non-existent index
+      // (i.e., directory without index.md), use first child's href
+      if (fixedChildren.length > 0 && node.href) {
+        // Check if this href would actually resolve to a doc
+        const hasIndexDoc = docs.some(
+          (d) => `/${d.slug.join('/')}` === node.href
+        )
+
+        if (!hasIndexDoc && fixedChildren[0]?.href) {
+          return {
+            ...node,
+            href: fixedChildren[0].href,
+            children: fixedChildren,
+          }
+        }
+      }
+
+      return {
+        ...node,
+        children: fixedChildren,
+      }
+    })
+  }
+
+  const sorted = sortNodes(rootItems)
+  return fixMissingIndexHrefs(sorted)
 }
 
 export async function getSidebarNavigation(): Promise<SidebarNavItem[]> {
