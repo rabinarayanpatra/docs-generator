@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { CodeBlock } from './code-block'
 import { Callout } from './callout'
+import { TabsComponent, TabList, Tab, TabPanel } from './tabs'
+import { Steps, Step } from './steps'
+import { FileTree, FileTreeItem } from './file-tree'
 import { cn } from '@/lib/utils'
 
 const components = {
@@ -175,6 +178,14 @@ const components = {
 
   // Custom components
   Callout,
+  Tabs: TabsComponent,
+  TabList,
+  Tab,
+  TabPanel,
+  Steps,
+  Step,
+  FileTree,
+  FileTreeItem,
 }
 
 export default components

@@ -111,6 +111,97 @@ Headings automatically get anchor links for easy sharing:
 
 #### Level 4 Heading
 
+## File Tree
+
+Display project structure with files and folders:
+
+<FileTree>
+  <FileTreeItem name="src" type="folder">
+    <FileTreeItem name="app" type="folder">
+      <FileTreeItem name="layout.tsx" />
+      <FileTreeItem name="page.tsx" />
+      <FileTreeItem name="[...slug]" type="folder">
+        <FileTreeItem name="page.tsx" />
+      </FileTreeItem>
+    </FileTreeItem>
+    <FileTreeItem name="components" type="folder">
+      <FileTreeItem name="ui" type="folder" />
+      <FileTreeItem name="mdx" type="folder" />
+    </FileTreeItem>
+    <FileTreeItem name="lib" type="folder">
+      <FileTreeItem name="docs.ts" />
+      <FileTreeItem name="mdx.ts" />
+    </FileTreeItem>
+  </FileTreeItem>
+  <FileTreeItem name="content" type="folder">
+    <FileTreeItem name="index.md" />
+    <FileTreeItem name="guides" type="folder" />
+  </FileTreeItem>
+  <FileTreeItem name="package.json" />
+  <FileTreeItem name="tsconfig.json" />
+</FileTree>
+
+## Steps
+
+Use steps to create sequential instructions with visual numbering:
+
+<Steps>
+  <Step title="Clone the repository">
+    First, clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/username/docs-generator.git
+    ```
+
+  </Step>
+  <Step title="Install dependencies">
+    Navigate to the project directory and install dependencies:
+
+    ```bash
+    cd docs-generator
+    npm install
+    ```
+
+  </Step>
+  <Step title="Start development server">
+    Run the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+  </Step>
+</Steps>
+
+## Tabs
+
+Use tabs to organize related content like code examples for different package managers:
+
+<Tabs defaultValue="npm">
+  <TabList>
+    <Tab value="npm" label="npm" />
+    <Tab value="yarn" label="Yarn" />
+    <Tab value="pnpm" label="pnpm" />
+  </TabList>
+  <TabPanel value="npm">
+    ```bash
+    npm install next-mdx-remote
+    ```
+  </TabPanel>
+  <TabPanel value="yarn">
+    ```bash
+    yarn add next-mdx-remote
+    ```
+  </TabPanel>
+  <TabPanel value="pnpm">
+    ```bash
+    pnpm add next-mdx-remote
+    ```
+  </TabPanel>
+</Tabs>
+
 ## Tips for Using Components
 
 <Callout type="info" title="Best Practices">
@@ -118,4 +209,5 @@ Headings automatically get anchor links for easy sharing:
 - Choose the appropriate callout type for your message
 - Keep code examples concise and focused
 - Add descriptive titles to callouts when possible
+- Use tabs for alternative options (package managers, languages, etc.)
 </Callout>
