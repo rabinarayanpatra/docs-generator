@@ -5,6 +5,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
 import type { Root, Link } from 'mdast'
+import mdxComponents from '@/components/mdx/mdx-components'
 
 // Remark plugin to resolve relative links
 function remarkRelativeLinks() {
@@ -30,6 +31,7 @@ function remarkRelativeLinks() {
 export async function compileMDXContent(source: string) {
   const { content, frontmatter } = await compileMDX({
     source,
+    components: mdxComponents,
     options: {
       parseFrontmatter: true,
       mdxOptions: {
