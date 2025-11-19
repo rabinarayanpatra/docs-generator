@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getCachedSidebarNavigation } from '@/lib/navigation'
 import { MobileSidebar } from '@/components/navigation/mobile-sidebar'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { SearchDialog } from '@/components/search/search-dialog'
 import { siteConfig } from '@/config/site'
 
 export async function Header() {
@@ -17,30 +18,35 @@ export async function Header() {
             <span className="text-xl font-bold">{siteConfig.name}</span>
           </Link>
 
-          <nav className="flex items-center space-x-6">
-            {siteConfig.nav.mainNav.map((item) =>
-              item.external ? (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {item.title}
-                </a>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {item.title}
-                </Link>
-              )
-            )}
-            {siteConfig.theme.enabled && <ThemeToggle />}
-          </nav>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:block">
+              <SearchDialog />
+            </div>
+            <nav className="flex items-center space-x-6">
+              {siteConfig.nav.mainNav.map((item) =>
+                item.external ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {item.title}
+                  </Link>
+                )
+              )}
+              {siteConfig.theme.enabled && <ThemeToggle />}
+            </nav>
+          </div>
         </div>
       </div>
     </header>

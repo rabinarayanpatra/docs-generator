@@ -3,7 +3,10 @@ import { getDocBySlug, getAllDocs } from '@/lib/docs'
 import { compileMDXContent } from '@/lib/mdx'
 import { extractTableOfContents } from '@/lib/toc'
 import { getCachedBreadcrumbs } from '@/lib/navigation'
+import { getPageNavigation } from '@/lib/page-navigation'
 import { Breadcrumb } from '@/components/navigation/breadcrumb'
+import { TableOfContents } from '@/components/toc/table-of-contents'
+import { PageNav } from '@/components/navigation/page-nav'
 import type { Metadata } from 'next'
 
 interface DocPageProps {
@@ -71,6 +74,7 @@ export default async function DocPage(props: DocPageProps) {
   const { content } = await compileMDXContent(doc.content)
   const toc = await extractTableOfContents(doc.content)
   const breadcrumbs = await getCachedBreadcrumbs(params.slug)
+  const pageNav = await getPageNavigation(params.slug)
 
   return (
     <div className="flex min-w-0 gap-8">
@@ -91,25 +95,14 @@ export default async function DocPage(props: DocPageProps) {
         <div className="prose prose-slate max-w-none dark:prose-invert">
           {content}
         </div>
+
+        <PageNav prev={pageNav.prev} next={pageNav.next} />
       </article>
 
       {toc.length > 0 && (
         <aside className="hidden w-64 shrink-0 xl:block">
           <div className="sticky top-20">
-            <h3 className="mb-4 text-sm font-semibold">On This Page</h3>
-            <nav className="space-y-2">
-              {toc.map((item) => (
-                <a
-                  key={item.slug}
-                  href={`#${item.slug}`}
-                  className={`block text-sm text-muted-foreground transition-colors hover:text-primary ${
-                    item.level === 3 ? 'pl-4' : ''
-                  }`}
-                >
-                  {item.title}
-                </a>
-              ))}
-            </nav>
+            <TableOfContents items={toc} />
           </div>
         </aside>
       )}
