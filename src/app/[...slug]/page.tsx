@@ -73,8 +73,8 @@ export default async function DocPage(props: DocPageProps) {
   const breadcrumbs = await getCachedBreadcrumbs(params.slug)
 
   return (
-    <div className="flex gap-8">
-      <article className="max-w-3xl flex-1">
+    <div className="flex min-w-0 gap-8">
+      <article className="min-w-0 flex-1">
         <Breadcrumb items={breadcrumbs} />
         <div className="mb-8">
           <h1 className="mb-4 text-4xl font-bold">{doc.frontmatter.title}</h1>
