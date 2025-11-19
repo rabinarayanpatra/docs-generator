@@ -39,7 +39,7 @@ export async function buildNavigationTree(): Promise<NavigationNode[]> {
         const node: NavigationNode = {
           title:
             isDirectory && i === parts.length - 1 ? title : formatTitle(part),
-          href: isDirectory ? `/docs/${currentPath}` : undefined,
+          href: isDirectory ? `/${currentPath}` : undefined,
           order,
           children: [],
         }
@@ -60,7 +60,7 @@ export async function buildNavigationTree(): Promise<NavigationNode[]> {
         const node = tree.get(currentPath)
         if (node) {
           node.title = doc.frontmatter.title || formatTitle(part)
-          node.href = `/docs/${doc.slug.join('/')}`
+          node.href = `/${doc.slug.join('/')}`
           node.order = doc.frontmatter.order ?? 999
         }
       }
@@ -101,7 +101,7 @@ export async function getSidebarNavigation(): Promise<SidebarNavItem[]> {
 }
 
 export async function getBreadcrumbs(slug: string[]): Promise<NavItem[]> {
-  const breadcrumbs: NavItem[] = [{ title: 'Docs', href: '/docs' }]
+  const breadcrumbs: NavItem[] = [{ title: 'Home', href: '/' }]
 
   let currentPath = ''
   for (let i = 0; i < slug.length; i++) {
@@ -114,13 +114,13 @@ export async function getBreadcrumbs(slug: string[]): Promise<NavItem[]> {
       if (matchingDoc) {
         breadcrumbs.push({
           title: matchingDoc.frontmatter.title || formatTitle(slug[i]),
-          href: `/docs/${currentPath}`,
+          href: `/${currentPath}`,
         })
       }
     } catch {
       breadcrumbs.push({
         title: formatTitle(slug[i]),
-        href: `/docs/${currentPath}`,
+        href: `/${currentPath}`,
       })
     }
   }

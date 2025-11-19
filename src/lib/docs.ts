@@ -3,11 +3,15 @@ import path from 'path'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
 import { DocsFrontmatter, DocsPage } from '@/types/docs'
+import { validateContentStructure } from './validate'
 
-const docsDirectory = path.join(process.cwd(), 'docs')
+const contentDirectory = path.join(process.cwd(), 'content')
+
+// Validate content structure on module load
+validateContentStructure()
 
 export function getDocsPath(): string {
-  return docsDirectory
+  return contentDirectory
 }
 
 export function getAllDocsPaths(): string[] {
@@ -36,12 +40,12 @@ export function getAllDocsPaths(): string[] {
     }
   }
 
-  readDir(docsDirectory)
+  readDir(contentDirectory)
   return files
 }
 
 export function pathToSlug(filePath: string): string[] {
-  const relativePath = path.relative(docsDirectory, filePath)
+  const relativePath = path.relative(contentDirectory, filePath)
   const withoutExt = relativePath.replace(/\.(md|mdx)$/, '')
 
   // Convert index files to parent directory
@@ -54,15 +58,15 @@ export function slugToPath(slug: string[]): string {
   const slugPath = slug.join('/')
 
   // Try exact match first
-  const mdPath = path.join(docsDirectory, `${slugPath}.md`)
-  const mdxPath = path.join(docsDirectory, `${slugPath}.mdx`)
+  const mdPath = path.join(contentDirectory, `${slugPath}.md`)
+  const mdxPath = path.join(contentDirectory, `${slugPath}.mdx`)
 
   if (fs.existsSync(mdPath)) return mdPath
   if (fs.existsSync(mdxPath)) return mdxPath
 
   // Try index file in directory
-  const indexMdPath = path.join(docsDirectory, slugPath, 'index.md')
-  const indexMdxPath = path.join(docsDirectory, slugPath, 'index.mdx')
+  const indexMdPath = path.join(contentDirectory, slugPath, 'index.md')
+  const indexMdxPath = path.join(contentDirectory, slugPath, 'index.mdx')
 
   if (fs.existsSync(indexMdPath)) return indexMdPath
   if (fs.existsSync(indexMdxPath)) return indexMdxPath

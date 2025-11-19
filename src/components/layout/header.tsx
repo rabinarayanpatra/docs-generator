@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getCachedSidebarNavigation } from '@/lib/navigation'
 import { MobileSidebar } from '@/components/navigation/mobile-sidebar'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { docsConfig } from '@/config/docs.config'
+import { siteConfig } from '@/config/site'
 
 export async function Header() {
   const navigation = await getCachedSidebarNavigation()
@@ -14,20 +14,32 @@ export async function Header() {
 
         <div className="flex flex-1 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">{docsConfig.name}</span>
+            <span className="text-xl font-bold">{siteConfig.name}</span>
           </Link>
 
           <nav className="flex items-center space-x-6">
-            {docsConfig.nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {item.title}
-              </Link>
-            ))}
-            <ThemeToggle />
+            {siteConfig.nav.mainNav.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item.title}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item.title}
+                </Link>
+              )
+            )}
+            {siteConfig.theme.enabled && <ThemeToggle />}
           </nav>
         </div>
       </div>

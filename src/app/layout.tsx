@@ -3,12 +3,13 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Header } from '@/components/layout/header'
+import { siteConfig } from '@/config/site'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Docs Generator',
-  description: 'Modern documentation generator built with Next.js 16',
+  title: siteConfig.name,
+  description: siteConfig.description,
 }
 
 export default function RootLayout({
@@ -21,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme={siteConfig.theme.defaultTheme}
           enableSystem
           disableTransitionOnChange
         >

@@ -10,7 +10,7 @@ import type { Root, Link } from 'mdast'
 function remarkRelativeLinks() {
   return (tree: Root) => {
     visit(tree, 'link', (node: Link) => {
-      // Only process relative links
+      // Only process relative links (not starting with http, #, or /)
       if (
         node.url &&
         !node.url.startsWith('http') &&
@@ -20,16 +20,8 @@ function remarkRelativeLinks() {
         // Remove .md or .mdx extension
         node.url = node.url.replace(/\.mdx?$/, '')
 
-        // Ensure link starts with /docs
-        node.url = `/docs/${node.url}`
-      } else if (
-        node.url &&
-        node.url.startsWith('/') &&
-        !node.url.startsWith('/docs') &&
-        !node.url.startsWith('http')
-      ) {
-        // If it's an absolute path but not starting with /docs, prefix it
-        node.url = `/docs${node.url}`
+        // Convert to absolute path
+        node.url = `/${node.url}`
       }
     })
   }

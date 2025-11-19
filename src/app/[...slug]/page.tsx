@@ -15,9 +15,19 @@ interface DocPageProps {
 export async function generateStaticParams() {
   const docs = await getAllDocs()
 
-  return docs.map((doc) => ({
-    slug: doc.slug,
-  }))
+  // Filter out index.md as it's handled by the home page
+  // Also filter out empty slugs
+  return docs
+    .filter((doc) => {
+      // Exclude index or empty slugs
+      if (doc.slug.length === 0) return false
+      if (doc.slug.length === 1 && doc.slug[0] === '') return false
+      if (doc.slug.length === 1 && doc.slug[0] === 'index') return false
+      return true
+    })
+    .map((doc) => ({
+      slug: doc.slug,
+    }))
 }
 
 export async function generateMetadata(props: DocPageProps): Promise<Metadata> {
