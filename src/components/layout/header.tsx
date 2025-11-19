@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getCachedSidebarNavigation } from '@/lib/navigation'
 import { MobileSidebar } from '@/components/navigation/mobile-sidebar'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { SearchDialog } from '@/components/search/search-dialog'
+import { CommandMenu } from '@/components/search/command-menu'
 import { siteConfig } from '@/config/site'
 
 export async function Header() {
@@ -20,7 +20,7 @@ export async function Header() {
 
           <div className="flex items-center gap-4">
             <div className="hidden md:block">
-              <SearchDialog />
+              <CommandMenu />
             </div>
             <nav className="flex items-center space-x-6">
               {siteConfig.nav.mainNav.map((item) =>
