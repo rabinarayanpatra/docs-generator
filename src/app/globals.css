@@ -56,4 +56,94 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer base {
+  .prose {
+    @apply text-foreground;
+  }
+
+  .prose :where(a):not(:where([class~='not-prose'] *)) {
+    @apply font-medium text-primary no-underline hover:underline;
+  }
+
+  .prose :where(code):not(:where([class~='not-prose'] *)) {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm before:content-none after:content-none;
+  }
+
+  .prose :where(pre):not(:where([class~='not-prose'] *)) {
+    @apply overflow-x-auto rounded-lg border border-border bg-muted p-4;
+  }
+
+  .prose :where(pre code):not(:where([class~='not-prose'] *)) {
+    @apply bg-transparent p-0 text-sm;
+  }
+
+  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+    @apply rounded-r border-l-4 border-primary bg-muted/50 px-4 py-2 not-italic;
+  }
+
+  .prose :where(h1):not(:where([class~='not-prose'] *)) {
+    @apply scroll-mt-20 text-4xl font-bold tracking-tight;
+  }
+
+  .prose :where(h2):not(:where([class~='not-prose'] *)) {
+    @apply mb-4 mt-10 scroll-mt-20 border-b pb-2 text-3xl font-semibold tracking-tight;
+  }
+
+  .prose :where(h3):not(:where([class~='not-prose'] *)) {
+    @apply mb-4 mt-8 scroll-mt-20 text-2xl font-semibold tracking-tight;
+  }
+
+  .prose :where(h4):not(:where([class~='not-prose'] *)) {
+    @apply mb-3 mt-6 scroll-mt-20 text-xl font-semibold tracking-tight;
+  }
+
+  .prose :where(table):not(:where([class~='not-prose'] *)) {
+    @apply w-full border-collapse;
+  }
+
+  .prose :where(th):not(:where([class~='not-prose'] *)) {
+    @apply border border-border bg-muted p-3 text-left font-semibold;
+  }
+
+  .prose :where(td):not(:where([class~='not-prose'] *)) {
+    @apply border border-border p-3;
+  }
+
+  .prose :where(ul):not(:where([class~='not-prose'] *)) {
+    @apply my-4 list-disc pl-6;
+  }
+
+  .prose :where(ol):not(:where([class~='not-prose'] *)) {
+    @apply my-4 list-decimal pl-6;
+  }
+
+  .prose :where(li):not(:where([class~='not-prose'] *)) {
+    @apply my-2;
+  }
+
+  /* Anchor links */
+  .prose .anchor {
+    @apply no-underline hover:underline;
+  }
+
+  .prose .anchor:hover::before {
+    @apply opacity-100;
+  }
+
+  .prose .anchor::before {
+    @apply absolute -left-5 opacity-0 transition-opacity;
+    content: '#';
+  }
 }
