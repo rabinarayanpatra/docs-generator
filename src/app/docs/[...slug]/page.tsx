@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { getDocBySlug, getAllDocs } from '@/lib/docs'
 import { compileMDXContent } from '@/lib/mdx'
 import { extractTableOfContents } from '@/lib/toc'
+import { getCachedBreadcrumbs } from '@/lib/navigation'
+import { Breadcrumb } from '@/components/navigation/breadcrumb'
 import type { Metadata } from 'next'
 
 interface DocPageProps {
@@ -58,10 +60,12 @@ export default async function DocPage(props: DocPageProps) {
 
   const { content } = await compileMDXContent(doc.content)
   const toc = await extractTableOfContents(doc.content)
+  const breadcrumbs = await getCachedBreadcrumbs(params.slug)
 
   return (
     <div className="flex gap-8">
       <article className="max-w-3xl flex-1">
+        <Breadcrumb items={breadcrumbs} />
         <div className="mb-8">
           <h1 className="mb-4 text-4xl font-bold">{doc.frontmatter.title}</h1>
           {doc.frontmatter.description && (
