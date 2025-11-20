@@ -6,7 +6,7 @@ order: 0
 
 # Welcome to Documentation
 
-This is a modern documentation generator built with Next.js 16, designed to be fast, customizable, and easy to use.
+A modern, fast documentation generator built with Next.js 16. **Fork this repo and create your own documentation site in minutes.**
 
 ## Features
 
@@ -19,14 +19,22 @@ This is a modern documentation generator built with Next.js 16, designed to be f
 - 🔗 **Relative Links** - Use relative links between docs seamlessly
 - 📑 **Auto Navigation** - Automatic sidebar and breadcrumb generation from file structure
 
-## Getting Started
+## Quick Start
 
-Get started by exploring the documentation sections:
+**Ready to create your own docs?** It's incredibly simple:
 
-- [Getting Started](/getting-started) - Learn how to set up and use this documentation generator
-- [Guides](/guides) - Step-by-step guides for common tasks
-- [API Reference](/api) - Complete API documentation
+1. **Fork** the [GitHub repository](https://github.com/rabinarayanpatra/docs-generator)
+2. **Clone** your fork and install dependencies (`npm install`)
+3. **Add** your content to the `content/` directory
+4. **Deploy** to Vercel, Netlify, or any static hosting
 
-## Quick Links
+That's it! Your documentation site will be live in minutes.
 
-Browse through the main sections to learn more about how to use this documentation generator effectively.
+## Learn More
+
+Explore the documentation to customize your site:
+
+- [Getting Started](/getting-started) - Complete setup guide and configuration
+- [Writing Docs](/guides/writing-docs) - Best practices for writing documentation
+- [MDX Components](/guides/components) - Available components and features
+- [API Reference](/api/overview) - Complete API documentation
