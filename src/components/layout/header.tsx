@@ -3,6 +3,7 @@ import { getCachedSidebarNavigation } from '@/lib/navigation'
 import { MobileSidebar } from '@/components/navigation/mobile-sidebar'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { CommandMenu } from '@/components/search/command-menu'
+import { GitHubStars } from '@/components/github-stars'
 import { siteConfig } from '@/config/site'
 
 export async function Header() {
@@ -22,29 +23,34 @@ export async function Header() {
             <div className="hidden md:block">
               <CommandMenu />
             </div>
-            <nav className="flex items-center space-x-6">
-              {siteConfig.nav.mainNav.map((item) =>
-                item.external ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {item.title}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {item.title}
-                  </Link>
-                )
-              )}
-              {siteConfig.theme.enabled && <ThemeToggle />}
+            <nav className="flex items-center gap-2">
+              <div className="hidden items-center space-x-6 sm:flex">
+                {siteConfig.nav.mainNav.map((item) =>
+                  item.external ? (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.title}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.title}
+                    </Link>
+                  )
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <GitHubStars />
+                {siteConfig.theme.enabled && <ThemeToggle />}
+              </div>
             </nav>
           </div>
         </div>

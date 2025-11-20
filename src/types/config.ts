@@ -9,6 +9,11 @@ export interface SiteConfig {
   description: string
   url?: string
 
+  github?: {
+    repo: string
+    url: string
+  }
+
   nav: {
     mainNav: NavItem[]
     socialLinks?: NavItem[]

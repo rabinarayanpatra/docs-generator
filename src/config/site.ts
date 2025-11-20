@@ -5,6 +5,11 @@ export const siteConfig: SiteConfig = {
   description: 'Beautiful documentation site built with Next.js',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.example.com',
 
+  github: {
+    repo: 'rabinarayanpatra/docs-generator',
+    url: 'https://github.com/rabinarayanpatra/docs-generator',
+  },
+
   nav: {
     mainNav: [
       {
@@ -26,7 +31,7 @@ export const siteConfig: SiteConfig = {
     socialLinks: [
       {
         title: 'GitHub',
-        href: 'https://github.com',
+        href: 'https://github.com/rabinarayanpatra/docs-generator',
         external: true,
       },
     ],
