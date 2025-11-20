@@ -1,6 +1,6 @@
 # Documentation Generator
 
-A modern, fast, and beautiful documentation generator built with Next.js 15, TypeScript, and Tailwind CSS. Create stunning documentation sites with MDX support, full-text search, dark mode, and more.
+A modern, fast, and beautiful documentation generator built with Next.js 16, TypeScript, and Tailwind CSS. Create stunning documentation sites with MDX support, full-text search, dark mode, and more.
 
 ## Features
 
@@ -9,7 +9,7 @@ A modern, fast, and beautiful documentation generator built with Next.js 15, Typ
 - **🔍 Full-Text Search** - Fast client-side search powered by FlexSearch
 - **📱 Mobile Responsive** - Optimized for all screen sizes
 - **🎯 SEO Optimized** - Built-in SEO with sitemap, robots.txt, and RSS feed
-- **⚡ Lightning Fast** - Built on Next.js 15 with optimized performance
+- **⚡ Lightning Fast** - Built on Next.js 16 with Turbopack for optimized performance
 - **🧭 Auto Navigation** - Automatic prev/next navigation and table of contents
 - **🎭 Syntax Highlighting** - Beautiful code blocks with Shiki
 - **📊 Math Support** - KaTeX for mathematical expressions
@@ -21,7 +21,7 @@ A modern, fast, and beautiful documentation generator built with Next.js 15, Typ
 
 ### Prerequisites
 
-- Node.js 18.x or later
+- Node.js 20.9.0 or later
 - npm, yarn, or pnpm
 
 ### Installation
@@ -170,10 +170,10 @@ Edit `src/lib/navigation.ts` to customize the sidebar navigation structure.
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production with Turbopack
 - `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run lint` - Run ESLint (using ESLint CLI)
 - `npm run format` - Format code with Prettier
 - `npm run type-check` - Run TypeScript type checking
 - `npm run test` - Run tests
@@ -246,14 +246,14 @@ Use blockquotes for callouts:
 ### Docker
 
 ```dockerfile
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
@@ -298,7 +298,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Tech Stack
 
-- [Next.js 15](https://nextjs.org/) - React framework
+- [Next.js 16](https://nextjs.org/) - React framework with Turbopack
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [MDX](https://mdxjs.com/) - Markdown with JSX
