@@ -38,22 +38,18 @@ export function PageNav({ prev, next }: PageNavProps) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [prev, next, router])
 
-  // Validate navigation links to prevent empty slugs from redirecting to home
-  const hasPrev = prev && prev.slug && prev.slug.trim() !== ''
-  const hasNext = next && next.slug && next.slug.trim() !== ''
-
-  if (!hasPrev && !hasNext) {
+  if (!prev && !next) {
     return null
   }
 
   return (
     <div className="mt-12 flex items-center justify-between gap-4 border-t pt-8">
-      {hasPrev ? (
+      {prev ? (
         <Link
           href={`/${prev.slug}`}
           className={cn(
             'group flex flex-1 items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted',
-            !hasNext && 'max-w-md'
+            !next && 'max-w-md'
           )}
         >
           <ChevronLeft className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1" />
@@ -61,26 +57,26 @@ export function PageNav({ prev, next }: PageNavProps) {
             <div className="text-xs font-medium text-muted-foreground">
               Previous
             </div>
-            <div className="mt-1 truncate font-medium">{prev!.title}</div>
+            <div className="mt-1 truncate font-medium">{prev.title}</div>
           </div>
         </Link>
       ) : (
         <div className="flex-1" />
       )}
 
-      {hasNext ? (
+      {next ? (
         <Link
           href={`/${next.slug}`}
           className={cn(
             'group flex flex-1 items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted',
-            !hasPrev && 'max-w-md'
+            !prev && 'max-w-md'
           )}
         >
           <div className="min-w-0 flex-1 text-right">
             <div className="text-xs font-medium text-muted-foreground">
               Next
             </div>
-            <div className="mt-1 truncate font-medium">{next!.title}</div>
+            <div className="mt-1 truncate font-medium">{next.title}</div>
           </div>
           <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
         </Link>
