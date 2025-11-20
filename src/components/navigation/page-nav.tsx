@@ -48,12 +48,12 @@ export function PageNav({ prev, next }: PageNavProps) {
 
   return (
     <div className="mt-12 flex items-center justify-between gap-4 border-t pt-8">
-      {hasPrev && (
+      {hasPrev ? (
         <Link
           href={`/${prev.slug}`}
           className={cn(
             'group flex flex-1 items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted',
-            !hasNext && 'ml-auto max-w-md'
+            !hasNext && 'max-w-md'
           )}
         >
           <ChevronLeft className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1" />
@@ -64,14 +64,16 @@ export function PageNav({ prev, next }: PageNavProps) {
             <div className="mt-1 truncate font-medium">{prev!.title}</div>
           </div>
         </Link>
+      ) : (
+        <div className="flex-1" />
       )}
 
-      {hasNext && (
+      {hasNext ? (
         <Link
           href={`/${next.slug}`}
           className={cn(
             'group flex flex-1 items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted',
-            !hasPrev && 'ml-auto max-w-md'
+            !hasPrev && 'max-w-md'
           )}
         >
           <div className="min-w-0 flex-1 text-right">
@@ -82,6 +84,8 @@ export function PageNav({ prev, next }: PageNavProps) {
           </div>
           <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
         </Link>
+      ) : (
+        <div className="flex-1" />
       )}
     </div>
   )
