@@ -7,6 +7,7 @@ import { getPageNavigation } from '@/lib/page-navigation'
 import { Breadcrumb } from '@/components/navigation/breadcrumb'
 import { TableOfContents } from '@/components/toc/table-of-contents'
 import { PageNav } from '@/components/navigation/page-nav'
+import { siteConfig } from '@/config/site'
 import type { Metadata } from 'next'
 
 interface DocPageProps {
@@ -76,36 +77,60 @@ export default async function DocPage(props: DocPageProps) {
   const breadcrumbs = await getCachedBreadcrumbs(params.slug)
   const pageNav = await getPageNavigation(params.slug)
 
+  // JSON-LD structured data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: doc.frontmatter.title,
+    description: doc.frontmatter.description,
+    author: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+    },
+    inLanguage: 'en-US',
+    ...(doc.frontmatter.image && { image: doc.frontmatter.image }),
+  }
+
   return (
-    <div className="flex min-w-0 gap-8">
-      <article className="min-w-0 flex-1">
-        <Breadcrumb items={breadcrumbs} />
-        <div className="mb-8">
-          <h1 className="mb-4 text-4xl font-bold">{doc.frontmatter.title}</h1>
-          {doc.frontmatter.description && (
-            <p className="mb-4 text-xl text-muted-foreground">
-              {doc.frontmatter.description}
-            </p>
-          )}
-          {doc.readingTime && (
-            <p className="text-sm text-muted-foreground">{doc.readingTime}</p>
-          )}
-        </div>
-
-        <div className="prose prose-slate max-w-none dark:prose-invert">
-          {content}
-        </div>
-
-        <PageNav prev={pageNav.prev} next={pageNav.next} />
-      </article>
-
-      {toc.length > 0 && (
-        <aside className="hidden w-64 shrink-0 xl:block">
-          <div className="sticky top-20">
-            <TableOfContents items={toc} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="flex min-w-0 gap-8">
+        <article className="min-w-0 flex-1">
+          <Breadcrumb items={breadcrumbs} />
+          <div className="mb-8">
+            <h1 className="mb-4 text-4xl font-bold">{doc.frontmatter.title}</h1>
+            {doc.frontmatter.description && (
+              <p className="mb-4 text-xl text-muted-foreground">
+                {doc.frontmatter.description}
+              </p>
+            )}
+            {doc.readingTime && (
+              <p className="text-sm text-muted-foreground">{doc.readingTime}</p>
+            )}
           </div>
-        </aside>
-      )}
-    </div>
+
+          <div className="prose prose-slate max-w-none dark:prose-invert">
+            {content}
+          </div>
+
+          <PageNav prev={pageNav.prev} next={pageNav.next} />
+        </article>
+
+        {toc.length > 0 && (
+          <aside className="hidden w-64 shrink-0 xl:block">
+            <div className="sticky top-20">
+              <TableOfContents items={toc} />
+            </div>
+          </aside>
+        )}
+      </div>
+    </>
   )
 }

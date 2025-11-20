@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
+import { cache } from 'react'
 import { DocsFrontmatter, DocsPage } from '@/types/docs'
 import { validateContentStructure } from './validate'
 
@@ -79,7 +80,9 @@ export function calculateReadingTime(content: string): string {
   return stats.text
 }
 
-export async function getDocBySlug(slug: string[]): Promise<DocsPage> {
+export const getDocBySlug = cache(async function getDocBySlug(
+  slug: string[]
+): Promise<DocsPage> {
   const filePath = slugToPath(slug)
   const fileContents = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(fileContents)
@@ -91,9 +94,11 @@ export async function getDocBySlug(slug: string[]): Promise<DocsPage> {
     path: filePath,
     readingTime: calculateReadingTime(content),
   }
-}
+})
 
-export async function getAllDocs(): Promise<DocsPage[]> {
+export const getAllDocs = cache(async function getAllDocs(): Promise<
+  DocsPage[]
+> {
   const paths = getAllDocsPaths()
 
   if (paths.length === 0) {
@@ -114,4 +119,4 @@ export async function getAllDocs(): Promise<DocsPage[]> {
     }
     return true
   })
-}
+})
