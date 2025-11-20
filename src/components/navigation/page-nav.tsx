@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+// import Link from 'next/link'
+// import { ChevronLeft, ChevronRight } from 'lucide-react'
+// import { cn } from '@/lib/utils'
 
 interface PageNavProps {
   prev: {
@@ -38,6 +38,10 @@ export function PageNav({ prev, next }: PageNavProps) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [prev, next, router])
 
+  // Temporarily disabled - prev/next navigation buttons
+  return null
+
+  /*
   if (!prev && !next) {
     return null
   }
@@ -85,4 +89,5 @@ export function PageNav({ prev, next }: PageNavProps) {
       )}
     </div>
   )
+  */
 }
