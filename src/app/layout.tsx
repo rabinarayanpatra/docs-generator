@@ -9,7 +9,7 @@ import { siteConfig } from '@/config/site'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteConfig.url || 'http://localhost:3000'),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

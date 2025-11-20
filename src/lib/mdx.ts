@@ -33,7 +33,8 @@ function remarkRelativeLinks() {
 export async function compileMDXContent(source: string) {
   const { content, frontmatter } = await compileMDX({
     source,
-    components: mdxComponents,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    components: mdxComponents as any,
     options: {
       parseFrontmatter: true,
       mdxOptions: {

@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site'
 
 export async function GET() {
   const docs = await getAllDocs()
-  const baseUrl = siteConfig.url
+  const baseUrl = siteConfig.url || 'http://localhost:3000'
 
   const feed = new RSS({
     title: siteConfig.name,
