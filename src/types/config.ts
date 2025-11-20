@@ -4,6 +4,13 @@ export interface NavItem {
   external?: boolean
 }
 
+export interface QuickLink {
+  title: string
+  href: string
+  description?: string
+  icon?: string
+}
+
 export interface SiteConfig {
   name: string
   description: string
@@ -18,6 +25,8 @@ export interface SiteConfig {
     mainNav: NavItem[]
     socialLinks?: NavItem[]
   }
+
+  quickLinks?: QuickLink[]
 
   theme: {
     enabled: boolean

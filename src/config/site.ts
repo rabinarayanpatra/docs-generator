@@ -19,12 +19,12 @@ export const siteConfig: SiteConfig = {
       },
       {
         title: 'Guides',
-        href: '/guides',
+        href: '/guides/writing-docs',
         external: false,
       },
       {
         title: 'API',
-        href: '/api',
+        href: '/api/overview',
         external: false,
       },
     ],
@@ -36,6 +36,34 @@ export const siteConfig: SiteConfig = {
       },
     ],
   },
+
+  quickLinks: [
+    {
+      title: 'Getting Started',
+      href: '/getting-started',
+      description: 'Learn how to set up and use the documentation generator',
+    },
+    {
+      title: 'Installation',
+      href: '/getting-started/installation',
+      description: 'Install and configure your documentation site',
+    },
+    {
+      title: 'Writing Docs',
+      href: '/guides/writing-docs',
+      description: 'Best practices for writing documentation',
+    },
+    {
+      title: 'MDX Components',
+      href: '/guides/components',
+      description: 'Explore available MDX components',
+    },
+    {
+      title: 'API Overview',
+      href: '/api/overview',
+      description: 'API reference and documentation',
+    },
+  ],
 
   theme: {
     enabled: true,

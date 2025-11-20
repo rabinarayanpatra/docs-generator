@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { FileText, Search } from 'lucide-react'
+import { FileText, Search, Star } from 'lucide-react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -10,7 +10,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from '@/components/ui/command'
+import { siteConfig } from '@/config/site'
 import type { SearchResultWithSnippet } from '@/lib/search'
 
 function useDebounce<T>(value: T, delay: number): T {
@@ -103,6 +105,37 @@ export function CommandMenu() {
           onValueChange={setQuery}
         />
         <CommandList>
+          {/* Quick Links - Show when no query */}
+          {!query &&
+            siteConfig.quickLinks &&
+            siteConfig.quickLinks.length > 0 && (
+              <>
+                <CommandGroup heading="Quick Links">
+                  {siteConfig.quickLinks.map((link) => (
+                    <CommandItem
+                      key={link.href}
+                      value={link.href}
+                      onSelect={() => {
+                        setOpen(false)
+                        router.push(link.href)
+                      }}
+                    >
+                      <Star className="mr-2 h-4 w-4 text-yellow-500" />
+                      <div className="flex flex-1 flex-col">
+                        <span className="font-medium">{link.title}</span>
+                        {link.description && (
+                          <span className="text-xs text-muted-foreground">
+                            {link.description}
+                          </span>
+                        )}
+                      </div>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandSeparator />
+              </>
+            )}
+
           {isLoading && (
             <div className="py-6 text-center text-sm text-muted-foreground">
               Searching...
@@ -114,7 +147,7 @@ export function CommandMenu() {
           )}
 
           {!isLoading && results.length > 0 && (
-            <CommandGroup heading="Documentation">
+            <CommandGroup heading="Search Results">
               {results.map((result) => (
                 <CommandItem
                   key={result.slug.join('/')}
