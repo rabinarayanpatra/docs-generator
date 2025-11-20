@@ -40,6 +40,29 @@ npm install next-mdx-remote
 npm install gray-matter
 ```
 
+### Line Highlighting
+
+You can highlight specific lines in code blocks using the `{line-numbers}` syntax:
+
+```typescript {2,4-6}
+function calculateTotal(items: Item[]) {
+  // This line is highlighted
+  const subtotal = items.reduce((sum, item) => sum + item.price, 0)
+  // These lines are also highlighted
+  const tax = subtotal * 0.1
+  const total = subtotal + tax
+  return total
+}
+```
+
+### Word Highlighting
+
+You can also highlight specific words or phrases using the `/word/` syntax:
+
+```javascript
+const message = console.log(message) //"Hello, World!"//
+```
+
 ## Callouts
 
 Use callouts to highlight important information:
@@ -237,7 +260,7 @@ $$
 
 ## Diagrams with Mermaid
 
-Create beautiful diagrams using Mermaid syntax.
+Create beautiful diagrams using Mermaid syntax. Diagrams automatically adapt to your theme (light/dark mode).
 
 ### Flow Chart
 

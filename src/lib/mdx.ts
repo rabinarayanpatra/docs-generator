@@ -58,6 +58,26 @@ export async function compileMDXContent(source: string) {
                 light: 'github-light',
               },
               keepBackground: false,
+              defaultLang: 'plaintext',
+              onVisitLine(node: { children: string | unknown[] }) {
+                // Prevent lines from collapsing in `display: grid` mode, and
+                // allow empty lines to be copy/pasted
+                if (node.children.length === 0) {
+                  node.children = [{ type: 'text', value: ' ' }]
+                }
+              },
+              onVisitHighlightedLine(node: {
+                properties: { className: string[] }
+              }) {
+                // Add class to highlighted lines
+                node.properties.className = ['line--highlighted']
+              },
+              onVisitHighlightedChars(node: {
+                properties: { className: string[] }
+              }) {
+                // Add class to highlighted chars
+                node.properties.className = ['word--highlighted']
+              },
             },
           ],
           rehypeKatex,
